@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Books;
 use Illuminate\Http\Request;
+use Auth;
 
 class BooksController extends Controller
 {
@@ -26,7 +27,12 @@ class BooksController extends Controller
      */
     public function create()
     {
-        return view('library.create');
+        if(Auth::user()->isAdministrator()){
+            return view('library.create');
+        }
+        else{
+            abort(403);
+        }
     }
 
     /**
@@ -37,21 +43,25 @@ class BooksController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'author' => 'required',
-            'title' => 'required',
-            'genre' => 'required',
-            'quantity' => 'required'
-        ]);
+        if(Auth::user()->isAdministrator()){
+            $request->validate([
+                'author' => 'required',
+                'title' => 'required',
+                'genre' => 'required',
+                'quantity' => 'required'
+            ]);
 
-        Books::create([
-            'author' => $request->author,
-            'title' => $request->title,
-            'genre' => $request->genre,
-            'quantity' => $request->quantity
-        ]);
-
-        return redirect()->route('books.index');
+            Books::create([
+                'author' => $request->author,
+                'title' => $request->title,
+                'genre' => $request->genre,
+                'quantity' => $request->quantity
+            ]);
+            return redirect()->route('books.index');
+        }
+        else{
+            abort(403);
+        }
     }
 
     /**
@@ -73,7 +83,12 @@ class BooksController extends Controller
      */
     public function edit(Books $book)
     {
-        return view('library.edit', compact('book'));
+        if(Auth::user()->isAdministrator()){
+            return view('library.edit', compact('book'));
+        }
+        else{
+            abort(403);
+        }
     }
 
     /**
@@ -85,21 +100,26 @@ class BooksController extends Controller
      */
     public function update(Request $request, Books $book)
     {
-        $request->validate([
-            'author' => 'required',
-            'title' => 'required',
-            'genre' => 'required',
-            'quantity' => 'required'
-        ]);
+        if(Auth::user()->isAdministrator()){
+            $request->validate([
+                'author' => 'required',
+                'title' => 'required',
+                'genre' => 'required',
+                'quantity' => 'required'
+            ]);
 
-        $book->update([
-            'author' => $request->author,
-            'title' => $request->title,
-            'genre' => $request->genre,
-            'quantity' => $request->quantity
-        ]);
+            $book->update([
+                'author' => $request->author,
+                'title' => $request->title,
+                'genre' => $request->genre,
+                'quantity' => $request->quantity
+            ]);
 
-        return redirect()->route('books.index');
+            return redirect()->route('books.index');
+        }
+        else{
+            abort(403);
+        }
     }
 
     /**
@@ -110,8 +130,13 @@ class BooksController extends Controller
      */
     public function destroy(Books $book)
     {
-        $book->delete();
+        if(Auth::user()->isAdministrator()){
+            $book->delete();
 
-        return redirect()->route('books.index');
+            return redirect()->route('books.index');
+        }
+        else{
+            abort(403);
+        }
     }
 }
