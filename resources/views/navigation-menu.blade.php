@@ -18,9 +18,11 @@
                     <x-jet-nav-link href="{{ route('books.index') }}" :active="request()->routeIs('books.index')">
                         {{ __('Library') }}
                     </x-jet-nav-link>
+                    @if(Auth::user()->isAdministrator())
                     <x-jet-nav-link href="{{ route('users.index') }}" :active="request()->routeIs('users.index')">
                         {{ __('Register') }}
                     </x-jet-nav-link>
+                    @endif
                 </div>
             </div>
 

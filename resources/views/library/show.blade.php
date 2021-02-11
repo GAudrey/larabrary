@@ -15,20 +15,24 @@
                     <th>Authors</th>
                     <th>Titles</th>
                     <th>Genres</th>
+                    <th>Stock</th>
                 </tr>
                 <tr>
                     <td>{{ $book->id }}</td>
                     <td>{{ $book->author }}</td>
                     <td>{{ $book->title }}</td>
                     <td>{{ $book->genre }}</td>
+                    <td>{{ $book->quantity }}</td>
                     <td>
                         <a href="{{ route('books.show', $book->id) }}">Display</a>
+                        @if(Auth::user()->isAdministrator())
                         <a href="{{ route('books.edit', $book->id) }}">Edit</a>
                         <form class="inline-block" action="{{ route('books.destroy', $book->id) }}" method="POST" onsubmit="return confirm('Are you sure?');">
                             <input type="hidden" name="_method" value="DELETE">
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
                             <input type="submit" class="text-red-600 bg-transparent hover:text-red-900 mb-2 mr-2" value="Delete">
                         </form>
+                        @endif
                     </td>
                 </tr>
                 </table>
