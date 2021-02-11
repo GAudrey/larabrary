@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-           {{ __('Select book') }}  (#{{ $book->id}} {{ $book->title}})
+           {{ __('All members') }}
         </h2>
     </x-slot>
 
@@ -12,18 +12,20 @@
                 <table>
                 <tr>   
                     <th>ID</th>
-                    <th>Authors</th>
-                    <th>Titles</th>
-                    <th>Genres</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Since</th>
                 </tr>
+                @foreach($users as $user)
                 <tr>
-                    <td>{{ $book->id }}</td>
-                    <td>{{ $book->author }}</td>
-                    <td>{{ $book->title }}</td>
-                    <td>{{ $book->genre }}</td>
+                    <td>{{ $user->id }}</td>
+                    <td>{{ $user->name }}</td>
+                    <td>{{ $user->email }}</td>
+                    <td>{{ $user->create_at }}</td>
                     <td>
-                        <a href="{{ route('books.edit', $book->id) }}">Edit</a>
-                        <form class="inline-block" action="{{ route('books.destroy', $book->id) }}"
+                        <a href="{{ route('users.show', $user->id) }}">Display</a>
+                        <a href="{{ route('users.edit', $user->id) }}">Edit</a>
+                        <form class="inline-block" action="{{ route('users.destroy', $user->id) }}"
                                             method="POST" onsubmit="return confirm('Are you sure?');">
                                             <input type="hidden" name="_method" value="DELETE">
                                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -33,6 +35,7 @@
                         </form>
                     </td>
                 </tr>
+                @endforeach
                 </table>
             </div>
         </div>

@@ -16,7 +16,13 @@
                         {{ __('Dashboard') }}
                     </x-jet-nav-link>
                     <x-jet-nav-link href="{{ route('books.index') }}" :active="request()->routeIs('books.index')">
-                        {{ __('Books list') }}
+                        {{ __('Library') }}
+                    </x-jet-nav-link>
+                    <x-jet-nav-link href="{{ route('books.create') }}" :active="request()->routeIs('books.create')">
+                        {{ __('New book') }}
+                    </x-jet-nav-link>
+                    <x-jet-nav-link href="{{ route('users.index') }}" :active="request()->routeIs('users.index')">
+                        {{ __('Register') }}
                     </x-jet-nav-link>
                 </div>
             </div>
