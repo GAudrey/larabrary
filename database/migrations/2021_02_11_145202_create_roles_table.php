@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddRolesColumnToUsersTable extends Migration
+class CreateRolesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class AddRolesColumnToUsersTable extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->enum('roles', ['Admin', 'User'])->default('user')->after('email');
-
+        Schema::create('roles', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('name');
         });
     }
 
@@ -26,8 +26,6 @@ class AddRolesColumnToUsersTable extends Migration
      */
     public function down()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('roles');
-        });
+        Schema::dropIfExists('roles');
     }
 }

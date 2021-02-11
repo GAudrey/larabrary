@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Books;
 use Illuminate\Http\Request;
+use Auth;
 
 class BooksController extends Controller
 {
@@ -26,7 +27,12 @@ class BooksController extends Controller
      */
     public function create()
     {
-        return view('library.create');
+        if(Auth::user()->isAdministrator()){
+            return view('library.create');
+        }
+        else{
+            abort(403);
+        }
     }
 
     /**
