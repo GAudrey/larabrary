@@ -17,7 +17,6 @@
                     <th>Name</th>
                     <th>Email</th>
                     <th>Role</th>
-                    <th>Since</th>
                     <th>Management</th>
                 </tr>
                 @foreach($users as $user)
@@ -25,8 +24,7 @@
                     <td>{{ $user->id }}</td>
                     <td>{{ $user->name }}</td>
                     <td>{{ $user->email }}</td>
-                    <td>{{ $user->role }}</td>
-                    <td>{{ $user->create_at }}</td>
+                    <td>{{ $user->roles }}</td>
                     <td>
                         <a href="{{ route('users.show', $user->id) }}">Display</a>
                         <a href="{{ route('users.edit', $user->id) }}">Edit</a>
