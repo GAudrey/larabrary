@@ -41,3 +41,7 @@ Users have only access to the books list and... that's it.
 ## Conclusion
 
 Laravel is not simple at all and the syntax is difficult to grasp. I think that with practice, it's a really uselful tool.
+
+## Login infos for test
+admin@librarybecode.be -> superbecode
+user@random.be -> randomuser
