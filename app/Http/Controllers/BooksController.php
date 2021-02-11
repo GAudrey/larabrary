@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\books;
+use App\Models\Books;
 use Illuminate\Http\Request;
 
 class BooksController extends Controller
@@ -14,7 +14,7 @@ class BooksController extends Controller
      */
     public function index()
     {
-        $books = books::all();
+        $books = Books::all();
 
         return view('library.index', compact('books'));
     }
@@ -44,7 +44,7 @@ class BooksController extends Controller
             'quantity' => 'required'
         ]);
 
-        books::create([
+        Books::create([
             'author' => $request->author,
             'title' => $request->title,
             'genre' => $request->genre,
@@ -57,10 +57,10 @@ class BooksController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\books  $book
+     * @param  \App\Models\Books  $book
      * @return \Illuminate\Http\Response
      */
-    public function show(books $book)
+    public function show(Books $book)
     {
         return view('library.show', compact('book'));
     }
@@ -68,10 +68,10 @@ class BooksController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\books  $book
+     * @param  \App\Models\Books  $book
      * @return \Illuminate\Http\Response
      */
-    public function edit(books $book)
+    public function edit(Books $book)
     {
         return view('library.edit', compact('book'));
     }
@@ -80,10 +80,10 @@ class BooksController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\books  $book
+     * @param  \App\Models\Books  $book
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, books $book)
+    public function update(Request $request, Books $book)
     {
         $request->validate([
             'author' => 'required',
@@ -105,10 +105,10 @@ class BooksController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\books  $book
+     * @param  \App\Models\Books  $book
      * @return \Illuminate\Http\Response
      */
-    public function destroy(books $book)
+    public function destroy(Books $book)
     {
         $book->delete();
 
